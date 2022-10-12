@@ -1,6 +1,5 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {API_BASE_URL} from "../../url.constants";
 
 @Injectable()
 export class UsersService {
@@ -10,7 +9,7 @@ export class UsersService {
 
   getUser(emailaddress: string) {
     emailaddress = emailaddress.trim();
-    const url = API_BASE_URL + '/api/users/' + emailaddress;
+    const url = '/api/users/' + emailaddress;
     return this.http.get(url);
   }
 }

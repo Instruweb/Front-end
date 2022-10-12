@@ -1,6 +1,6 @@
 import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
-import {API_BASE_URL} from "../../url.constants";
+import {API_HEADERS} from "../../url.constants";
 
 @Injectable()
 export class ProductsService {
@@ -9,7 +9,7 @@ export class ProductsService {
 
   getProduct(name: string) {
     name = name.trim();
-    const url = API_BASE_URL + '/api/products/' + name;
-    return this.http.get(url);
+    const url = '/api/products/' + name;
+      return this.http.get(url, API_HEADERS);
   }
 }
