@@ -5,8 +5,7 @@ import {API_BASE_URL} from "../../url.constants";
 @Injectable()
 export class UsersService {
 
-  constructor(
-    private http: HttpClient) {
+  constructor(private http: HttpClient) {
   }
 
   getUser(emailaddress: string) {
