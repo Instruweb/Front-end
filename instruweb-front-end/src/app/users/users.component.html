@@ -1,8 +1,12 @@
-<div class="search">
-  <label for="user-name">user email: </label>
-  <input type="text" id="user-name" [(ngModel)]="email">
-
-  <button type="button" (click)="search(email)">
-    Search
-  </button>
+<div class="container">
+  <div class="row">
+    <div class="col-4">
+      <form (ngSubmit)="search(email)">
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Search user by email</mat-label>
+          <input matInput type="text" id="user-name" [(ngModel)]="email" [ngModelOptions]="{standalone: true}">
+        </mat-form-field>
+      </form>
+    </div>
+  </div>
 </div>

@@ -9,6 +9,7 @@ import {Category} from "./category";
   styleUrls: ['./categories.component.scss']
 })
 export class CategoriesComponent implements OnInit {
+  hide: boolean = true;
   name: string = "";
   categories: Category[] = [];
 
@@ -17,6 +18,10 @@ export class CategoriesComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllCategories();
+  }
+
+  show() {
+    this.hide = !this.hide;
   }
 
   getAllCategories(): void {
@@ -32,5 +37,4 @@ export class CategoriesComponent implements OnInit {
       });
     }
   }
-
 }
