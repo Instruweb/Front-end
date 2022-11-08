@@ -10,6 +10,7 @@ import {Product} from "../product";
   styleUrls: ['./product-detail.component.scss']
 })
 export class ProductDetailComponent implements OnInit {
+  errorMessage: string = "";
   id: number = 0;
   product: Product | undefined;
 
@@ -29,9 +30,11 @@ export class ProductDetailComponent implements OnInit {
     this.productDetailService.getProductById(id)
       .subscribe(res => {
           this.product = <Product>res;
+          this.errorMessage = "";
         },
         error => {
-          console.log(error.statusText);
+          this.errorMessage = "ERROR: " + error.statusText;
+          this.product = undefined;
         }
       )
   }
