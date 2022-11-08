@@ -1,3 +1,18 @@
 .example-spacer {
   flex: 1 1 auto;
 }
+
+.toolbar-navigation {
+  a {
+    font-size: 17px;
+    color: white;
+  }
+}
+
+.hideToolbar {
+  display: none;
+}
+
+.showToolbar{
+  display: block;
+}

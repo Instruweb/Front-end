@@ -1,0 +1,14 @@
+<div class="container">
+  <div class="row">
+    <mat-tab-group *ngIf="product" style="width: 100%">
+      <mat-tab label="Product information">
+        <img class="card-img-top" src="/assets/images/{{product.image}}" alt="Card image cap">
+        <h3 class="card-title">{{product.name}}</h3>
+        <h4 class="card-subtitle mb-2 text-muted">&euro; {{product.price}}</h4>
+      </mat-tab>
+      <mat-tab label="Specifications">
+        <p class="card-text">{{product.description}}</p>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+</div>
