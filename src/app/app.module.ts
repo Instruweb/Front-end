@@ -5,7 +5,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {UsersComponent} from './users/users.component';
-import {HttpClientModule} from "@angular/common/http";
+import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {FormsModule} from "@angular/forms";
 import {ProductsComponent} from './products/products.component';
 import {CategoriesComponent} from './categories/categories.component';
