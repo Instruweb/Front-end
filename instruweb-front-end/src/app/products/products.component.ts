@@ -37,6 +37,7 @@ export class ProductsComponent implements OnInit {
           },
           error => {
             this.errorMessage = "ERROR: " + error.statusText;
+            this.foundProduct = undefined;
           }
         );
     }

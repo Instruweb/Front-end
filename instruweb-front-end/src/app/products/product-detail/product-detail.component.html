@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-    <mat-tab-group *ngIf="product" style="width: 100%">
+    <mat-tab-group *ngIf="product; else noProduct" style="width: 100%">
       <mat-tab label="Product information">
         <img class="card-img-top" src="/assets/images/{{product.image}}" alt="Card image cap">
         <h3 class="card-title">{{product.name}}</h3>
@@ -8,7 +8,15 @@
       </mat-tab>
       <mat-tab label="Specifications">
         <p class="card-text">{{product.description}}</p>
+        <p class="card-text">Supply: {{product.supply}}</p>
       </mat-tab>
     </mat-tab-group>
+
+    <ng-template #noProduct>
+      <div class="col">
+        <h2>Oops...</h2>
+        <p>Product not found.</p>
+      </div>
+    </ng-template>
   </div>
 </div>

@@ -2,9 +2,18 @@
   flex: 1 1 auto;
 }
 
+.mat-toolbar-multiple-rows {
+  min-height: 45px;
+}
+
+.mat-toolbar-row,  {
+  height: 45px;
+}
+
 .toolbar-navigation {
   a {
-    font-size: 17px;
+    font-size: 15px;
+    font-weight: normal;
     color: white;
   }
 }
