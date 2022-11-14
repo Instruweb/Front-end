@@ -19,15 +19,15 @@ export class ProductDetailComponent implements OnInit {
     private _ActivatedRoute: ActivatedRoute) {
   }
 
-  ngOnInit(): void {
+  async ngOnInit() {
     this._ActivatedRoute.params.subscribe((params: { [x: string]: string | number; }) => {
       this.id = +params['id'];
     });
-    this.getProductById(this.id);
+    await this.getProductById(this.id);
   }
 
-  getProductById(id: number): void {
-    this.productDetailService.getProductById(id)
+  async getProductById(id: number) {
+    (await this.productDetailService.getProductById(id))
       .subscribe(res => {
           this.product = <Product>res;
           this.errorMessage = "";

@@ -15,12 +15,14 @@ export class UsersComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.keycloakservice.getToken());
   }
 
   async doLogin() {
     this.keycloakservice.login().then(r => console.log(r));
-    console.log(this.keycloakservice.getToken());
+  }
+
+  async doRegister() {
+    this.keycloakservice.register().then(r => console.log(r));
   }
 
   search(searchTerm: string) {
