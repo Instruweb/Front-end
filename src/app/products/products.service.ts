@@ -1,23 +1,31 @@
 import {Injectable} from "@angular/core";
-import {HttpClient} from "@angular/common/http";
-import {API_HEADERS} from "../../url.constants";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Product} from "./product";
+import {KeycloakService} from "keycloak-angular";
+import {API_HEADERS} from "../../url.constants";
 
 @Injectable()
 export class ProductsService {
-  constructor(private http: HttpClient) {
+
+  constructor(private http: HttpClient, private keycloakService: KeycloakService) {
+    this.setHeaders().then(r => console.log(r));
   }
 
-  getProduct(name: string) {
+  async setHeaders() {
+    API_HEADERS.headers = API_HEADERS.headers.set('Authorization', 'Bearer ' + await this.keycloakService.getToken());
+    return "Success";
+  }
+
+  async getProduct(name: string) {
     name = name.trim();
     const url = '/api/products/' + name;
-      return this.http.get(url, API_HEADERS);
+    return this.http.get(url, API_HEADERS);
   }
 
-  getAllProducts(): Observable<Product[]> {
+  async getAllProducts(): Promise<Observable<Product[]>> {
     const url = '/api/products/all';
-    return this.http.get<Product[]>(url);
+    return this.http.get<Product[]>(url, API_HEADERS);
   }
 
   getProductsByMainCategoryId(id: number): Observable<Product[]> {

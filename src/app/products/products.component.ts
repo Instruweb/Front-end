@@ -28,9 +28,9 @@ export class ProductsComponent implements OnInit {
     this.getProductsByMainCategoryId(this.id);
   }
 
-  searchProduct(term: string) {
+  async searchProduct(term: string) {
     if (term) {
-      this.productsService.getProduct(term)
+      (await this.productsService.getProduct(term))
         .subscribe(res => {
             this.foundProduct = <Product>res;
             this.errorMessage = "";

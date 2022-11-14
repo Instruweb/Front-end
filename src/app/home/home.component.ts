@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Product} from "../products/product";
 import {ProductsService} from "../products/products.service";
+import {KeycloakService} from "keycloak-angular";
 
 @Component({
   selector: 'app-home',
@@ -11,15 +12,16 @@ import {ProductsService} from "../products/products.service";
 export class HomeComponent implements OnInit {
   products: Product[] = [];
 
-  constructor(private productService: ProductsService) {
+  constructor(private productService: ProductsService, private keycloackservice: KeycloakService) {
   }
 
-  ngOnInit(): void {
-    this.getAllProducts();
+  async ngOnInit() {
+    await this.getAllProducts();
+    console.log(this.keycloackservice.getToken())
   }
 
-  getAllProducts(): void {
-    this.productService.getAllProducts().subscribe(
+  async getAllProducts() {
+    (await this.productService.getAllProducts()).subscribe(
       products => (this.products = products)
     );
   }

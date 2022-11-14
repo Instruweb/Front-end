@@ -1,4 +1,4 @@
-import {CUSTOM_ELEMENTS_SCHEMA, NgModule, NO_ERRORS_SCHEMA} from '@angular/core';
+import {APP_INITIALIZER, CUSTOM_ELEMENTS_SCHEMA, NgModule, NO_ERRORS_SCHEMA} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {RouterModule, Routes} from '@angular/router';
 
@@ -20,6 +20,7 @@ import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 import { ProductDetailComponent } from './products/product-detail/product-detail.component';
 import {MatTabsModule} from "@angular/material/tabs";
+import {KeycloakAngularModule, KeycloakService} from "keycloak-angular";
 
 const appRoutes: Routes = [
   {path: 'home', component: HomeComponent},
@@ -29,6 +30,30 @@ const appRoutes: Routes = [
   {path: 'account', component: UsersComponent},
   {path: '**', component: PageNotFoundComponent}
 ]
+
+function initializeKeycloak(keycloak: KeycloakService) {
+  return () =>
+    keycloak.init({
+      config: {
+        url: 'http://localhost:8484',
+        realm: 'instruweb',
+        clientId: 'front-end-service'
+      },
+      initOptions: {
+        onLoad: 'check-sso',
+        silentCheckSsoRedirectUri: window.location.origin + '/assets/silent-check-sso.html',
+        pkceMethod: 'S256'
+      },
+      shouldAddToken: (request) => {
+        const { method, url } = request;
+
+        const isGetRequest = 'GET' === method.toUpperCase();
+        const acceptablePaths = ['/assets', '/api/*'];
+
+        return !(isGetRequest && acceptablePaths);
+      }
+    });
+}
 
 @NgModule({
   declarations: [
@@ -42,6 +67,7 @@ const appRoutes: Routes = [
   ],
   imports: [
     BrowserModule,
+    KeycloakAngularModule,
     RouterModule.forRoot(
       appRoutes
     ),
@@ -60,7 +86,14 @@ const appRoutes: Routes = [
   exports: [
     RouterModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initializeKeycloak,
+      multi: true,
+      deps: [KeycloakService]
+    }
+  ],
   bootstrap: [AppComponent]
 })
 
