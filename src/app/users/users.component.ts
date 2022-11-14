@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {UsersService} from "./users.service";
+import {KeycloakService} from "keycloak-angular";
 
 @Component({
   selector: 'app-users',
@@ -10,10 +11,16 @@ import {UsersService} from "./users.service";
 export class UsersComponent implements OnInit {
   email: string = "";
 
-  constructor(private userService: UsersService) {
+  constructor(private userService: UsersService, private keycloakservice: KeycloakService) {
   }
 
   ngOnInit(): void {
+    console.log(this.keycloakservice.getToken());
+  }
+
+  async doLogin() {
+    this.keycloakservice.login().then(r => console.log(r));
+    console.log(this.keycloakservice.getToken());
   }
 
   search(searchTerm: string) {
