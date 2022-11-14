@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {CategoriesService} from "./categories.service";
 import {Category} from "./category";
+import {KeycloakService} from "keycloak-angular";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-categories',
@@ -10,18 +12,29 @@ import {Category} from "./category";
 })
 export class CategoriesComponent implements OnInit {
   hide: boolean = true;
+  loggedIn: boolean = false;
   name: string = "";
   categories: Category[] = [];
 
-  constructor(private categoriesService: CategoriesService) {
+  constructor(
+    private categoriesService: CategoriesService,
+    private keycloakService: KeycloakService,
+    private router: Router
+  ) {
   }
 
-  ngOnInit(): void {
+  async ngOnInit() {
+    this.router.routeReuseStrategy.shouldReuseRoute = () => { return false; };
     this.getAllCategories();
+    this.loggedIn = await this.keycloakService.isLoggedIn();
   }
 
   show() {
     this.hide = !this.hide;
+  }
+
+  async doLogin() {
+    this.keycloakService.login().then(r => console.log(r));
   }
 
   getAllCategories(): void {
@@ -36,5 +49,9 @@ export class CategoriesComponent implements OnInit {
         console.log('category: ', res)
       });
     }
+  }
+
+  refresh(): void {
+    window.location.reload();
   }
 }

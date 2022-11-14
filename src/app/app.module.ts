@@ -27,6 +27,7 @@ const appRoutes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full'},
   {path: 'products/:id', component: ProductsComponent},
   {path: 'products/detail/:id', component: ProductDetailComponent},
+  {path: 'category/:id', component: ProductsComponent},
   {path: 'account', component: UsersComponent},
   {path: '**', component: PageNotFoundComponent}
 ]
