@@ -7,8 +7,14 @@
         </a>
       </div>
       <div class="header-information col-4">
-        <p>Gratis verzending vanaf &euro; 100,-</p>
-        <p>Voor 21:00 besteld, morgen in huis!</p>
+        <div class="d-block">
+          <mat-icon class="d-inline-block">local_shipping</mat-icon>
+          <p class="d-inline-block">Gratis verzending vanaf &euro; 100,-</p>
+        </div>
+        <div class="d-block">
+          <mat-icon class="d-inline-block">access_time</mat-icon>
+          <p class="d-inline-block">Voor 21:00 besteld, morgen in huis!</p>
+        </div>
       </div>
       <div class="col-4 user-info" *ngIf="!loggedIn; else user">
         <a (click)="doLogin()">

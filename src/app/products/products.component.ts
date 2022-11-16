@@ -48,4 +48,8 @@ export class ProductsComponent implements OnInit {
       products => (this.productsByCategory = products)
     );
   }
+
+  clear() {
+    this.foundProduct = undefined;
+  }
 }

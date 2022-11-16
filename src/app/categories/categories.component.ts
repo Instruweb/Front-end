@@ -3,21 +3,27 @@ import {CategoriesService} from "./categories.service";
 import {Category} from "./category";
 import {KeycloakService} from "keycloak-angular";
 import {ActivatedRoute, Router} from "@angular/router";
+import {UsersService} from "../users/users.service";
+import {User} from "../users/user";
+import {tsCastToAny} from "@angular/compiler-cli/src/ngtsc/typecheck/src/ts_util";
+import {error} from "@angular/compiler-cli/src/transformers/util";
 
 @Component({
   selector: 'app-categories',
   templateUrl: './categories.component.html',
-  providers: [CategoriesService],
+  providers: [CategoriesService, UsersService],
   styleUrls: ['./categories.component.scss']
 })
 export class CategoriesComponent implements OnInit {
   hide: boolean = true;
   loggedIn: boolean = false;
   name: string = "";
+  checkUsername: User | undefined;
   categories: Category[] = [];
 
   constructor(
     private categoriesService: CategoriesService,
+    private userService: UsersService,
     private keycloakService: KeycloakService,
     private router: Router
   ) {
@@ -27,6 +33,32 @@ export class CategoriesComponent implements OnInit {
     this.router.routeReuseStrategy.shouldReuseRoute = () => { return false; };
     this.getAllCategories();
     this.loggedIn = await this.keycloakService.isLoggedIn();
+
+    if (this.loggedIn) {
+      this.checkUser();
+    }
+  }
+
+  checkUser() {
+    this.keycloakService.loadUserProfile().then(profile => {
+      this.userService.getUser(profile.username)?.subscribe(res => {
+        this.checkUsername = <User>res;
+
+        if (profile.username == this.checkUsername?.username) {
+          console.log('already in database');
+        } else {
+          this.userService.sendEmail(profile.email, profile.username);
+        }
+      }, error => {
+        console.log("ERROR: ", error.statusText);
+
+        if (profile.username == this.checkUsername?.username) {
+          console.log('already in database');
+        } else {
+          this.userService.sendEmail(profile.email, profile.username);
+        }
+      });
+    });
   }
 
   show() {
