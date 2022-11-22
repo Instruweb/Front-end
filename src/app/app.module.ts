@@ -6,7 +6,7 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {UsersComponent} from './users/users.component';
 import {HttpClient, HttpClientModule} from "@angular/common/http";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {ProductsComponent} from './products/products.component';
 import {CategoriesComponent} from './categories/categories.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -21,12 +21,14 @@ import {MatInputModule} from "@angular/material/input";
 import { ProductDetailComponent } from './products/product-detail/product-detail.component';
 import {MatTabsModule} from "@angular/material/tabs";
 import {KeycloakAngularModule, KeycloakService} from "keycloak-angular";
+import {MatAutocompleteModule} from "@angular/material/autocomplete";
 
 const appRoutes: Routes = [
   {path: 'home', component: HomeComponent},
   {path: '', redirectTo: '/home', pathMatch: 'full'},
   {path: 'products/:id', component: ProductsComponent},
   {path: 'products/detail/:id', component: ProductDetailComponent},
+  {path: 'category/:id', component: ProductsComponent},
   {path: 'account', component: UsersComponent},
   {path: '**', component: PageNotFoundComponent}
 ]
@@ -81,7 +83,9 @@ function initializeKeycloak(keycloak: KeycloakService) {
     MatGridListModule,
     MatFormFieldModule,
     MatInputModule,
-    MatTabsModule
+    MatTabsModule,
+    MatAutocompleteModule,
+    ReactiveFormsModule
   ],
   exports: [
     RouterModule

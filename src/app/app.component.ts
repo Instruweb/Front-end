@@ -8,7 +8,7 @@ import {Component, Injectable} from '@angular/core';
 
 @Injectable()
 export class AppComponent {
-  title = 'instruweb-front-end';
+  title = 'Instruweb';
 
   constructor() {
   }

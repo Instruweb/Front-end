@@ -1,28 +1,26 @@
 import {Component, OnInit} from '@angular/core';
-import {Product} from "../products/product";
-import {ProductsService} from "../products/products.service";
-import {KeycloakService} from "keycloak-angular";
+import {CategoriesService} from "../categories/categories.service";
+import {Category} from "../categories/category";
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  providers: [ProductsService],
+  providers: [CategoriesService],
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  products: Product[] = [];
+  categories: Category[] = [];
 
-  constructor(private productService: ProductsService, private keycloackservice: KeycloakService) {
+  constructor(private categoriesService: CategoriesService) {
   }
 
   async ngOnInit() {
-    await this.getAllProducts();
-    console.log(this.keycloackservice.getToken())
+    await this.getAllCategories();
   }
 
-  async getAllProducts() {
-    (await this.productService.getAllProducts()).subscribe(
-      products => (this.products = products)
+  async getAllCategories() {
+    (await this.categoriesService.getAllCategories()).subscribe(
+      categories => (this.categories = categories)
     );
   }
 }
