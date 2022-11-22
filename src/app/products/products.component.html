@@ -1,7 +1,7 @@
 <div class="container mt-5">
   <div class="search">
     <form class="example-form" (ngSubmit)="searchProduct(name)">
-      <mat-form-field class="example-full-width" appearance="fill">
+      <mat-form-field class="example-full-width" appearance="fill" *ngIf="productsByCategory">
         <mat-label>Number</mat-label>
         <input type="text"
                [(ngModel)]="name" [ngModelOptions]="{standalone: true}"
@@ -9,7 +9,7 @@
                aria-label="Number"
                matInput
                [matAutocomplete]="auto">
-        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" >
           <mat-option *ngFor="let option of productsByCategory" [value]="option.name">
             {{option.name}}
           </mat-option>

@@ -2,11 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {CategoriesService} from "./categories.service";
 import {Category} from "./category";
 import {KeycloakService} from "keycloak-angular";
-import {ActivatedRoute, Router} from "@angular/router";
+import {Router} from "@angular/router";
 import {UsersService} from "../users/users.service";
 import {User} from "../users/user";
-import {tsCastToAny} from "@angular/compiler-cli/src/ngtsc/typecheck/src/ts_util";
-import {error} from "@angular/compiler-cli/src/transformers/util";
 
 @Component({
   selector: 'app-categories',

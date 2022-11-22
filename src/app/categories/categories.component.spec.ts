@@ -1,14 +1,14 @@
-import { TestBed } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
-import { AppComponent } from './app.component';
-import {CategoriesComponent} from "./categories/categories.component";
+import {TestBed} from '@angular/core/testing';
+import {RouterTestingModule} from '@angular/router/testing';
+import {CategoriesComponent} from './categories.component'
 import {HttpClientTestingModule} from "@angular/common/http/testing";
-import {CategoriesService} from "./categories/categories.service";
+import {CategoriesService} from "./categories.service";
 import {KeycloakService} from "keycloak-angular";
+import {UsersService} from "../users/users.service";
 import {MatIconModule} from "@angular/material/icon";
 import {MatToolbarModule} from "@angular/material/toolbar";
 
-describe('AppComponent', () => {
+describe('CategoriesComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
@@ -18,29 +18,28 @@ describe('AppComponent', () => {
         MatToolbarModule
       ],
       declarations: [
-        AppComponent,
         CategoriesComponent
       ],
       providers: [
         CategoriesService,
-        {provide: KeycloakService}
+        {provide: KeycloakService, UsersService}
       ]
     }).compileComponents();
   });
 
-  it('should create the app', () => {
-    const fixture = TestBed.createComponent(AppComponent);
+  it('should create the component', () => {
+    const fixture = TestBed.createComponent(CategoriesComponent);
 
     const app = fixture.componentInstance;
 
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'Instruweb'`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
+  it(`should be logged out as default'`, () => {
+    const fixture = TestBed.createComponent(CategoriesComponent);
 
     const app = fixture.componentInstance;
 
-    expect(app.title).toEqual('Instruweb');
+    expect(app.loggedIn).toEqual(false);
   });
 });
