@@ -1,16 +1,10 @@
 {
   "hosting": {
-    "public": "public",
+    "public": "dist/instruweb-front-end",
     "ignore": [
       "firebase.json",
       "**/.*",
       "**/node_modules/**"
-    ],
-    "rewrites": [
-      {
-        "source": "**",
-        "destination": "/index.html"
-      }
     ]
   }
 }
