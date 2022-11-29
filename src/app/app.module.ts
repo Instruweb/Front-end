@@ -45,6 +45,7 @@ function initializeKeycloak(keycloak: KeycloakService) {
         onLoad: 'check-sso',
         silentCheckSsoRedirectUri: window.location.origin + '/assets/silent-check-sso.html',
         pkceMethod: 'S256',
+        redirectUri: 'http://localhost:4200',
         checkLoginIframe: false
       },
       shouldAddToken: (request) => {
@@ -55,7 +56,8 @@ function initializeKeycloak(keycloak: KeycloakService) {
 
         return !(isGetRequest && acceptablePaths);
       }
-    });
+    }).then(success => console.log(`keycloak service is available.`)
+    ).catch(ex => console.log(`keycloak init exception: ${ex.error_description}`));
 }
 
 @NgModule({
