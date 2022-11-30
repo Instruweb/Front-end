@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ProductDetailService} from "./product-detail.service";
 import {ActivatedRoute} from "@angular/router";
 import {Product} from "../product";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-product-detail',
@@ -16,7 +17,8 @@ export class ProductDetailComponent implements OnInit {
 
   constructor(
     private productDetailService: ProductDetailService,
-    private _ActivatedRoute: ActivatedRoute) {
+    private _ActivatedRoute: ActivatedRoute,
+    private _snackBar: MatSnackBar) {
   }
 
   async ngOnInit() {
@@ -35,6 +37,10 @@ export class ProductDetailComponent implements OnInit {
         error => {
           this.errorMessage = "ERROR: " + error.statusText;
           this.product = undefined;
+          this._snackBar.open("The backend service is not available: " + error.statusText, 'OK', {
+            duration: 5000,
+            panelClass: ['errorSnackbar']
+          })
         }
       )
   }

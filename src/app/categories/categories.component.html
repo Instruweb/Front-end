@@ -43,17 +43,15 @@
       </button>
       <a (click)="show()">Alle categorieën</a>
       <span class="example-spacer"></span>
-
     </mat-toolbar-row>
-    <div *ngIf="categories.length > 0; else noCategories"></div>
-    <mat-toolbar-row *ngFor="let item of categories" class="toolbar-navigation"
-                     [ngClass]="hide ? 'hideToolbar' : 'showToolbar'">
+    <mat-toolbar-row *ngIf="categories.length > 0; else noCategories" class="noCategoriesRow"></mat-toolbar-row>
+    <mat-toolbar-row *ngFor="let item of categories" class="toolbar-navigation" [ngClass]="hide ? 'hideToolbar' : 'showToolbar'">
       <a [routerLink]="['/category', item.id]">{{item.name}}</a>
     </mat-toolbar-row>
 
     <ng-template #noCategories>
-      <mat-toolbar-row>
-        <span>No categories available</span>
+      <mat-toolbar-row [ngClass]="hide ? 'hideToolbar' : 'showToolbar'" class="toolbar-navigation">
+        <p class="noCategoriesRow">No categories available</p>
       </mat-toolbar-row>
     </ng-template>
   </mat-toolbar>

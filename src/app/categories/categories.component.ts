@@ -69,7 +69,8 @@ export class CategoriesComponent implements OnInit {
 
   getAllCategories(): void {
     this.categoriesService.getAllCategories().subscribe(
-      categories => (this.categories = categories)
+      categories => (this.categories = categories),
+      error => {console.log()}
     );
   }
 

@@ -7,6 +7,7 @@ import {KeycloakService} from "keycloak-angular";
 import {UsersService} from "../users/users.service";
 import {MatIconModule} from "@angular/material/icon";
 import {MatToolbarModule} from "@angular/material/toolbar";
+import {MatSnackBarModule} from "@angular/material/snack-bar";
 
 describe('CategoriesComponent', () => {
   beforeEach(async () => {
@@ -15,7 +16,8 @@ describe('CategoriesComponent', () => {
         RouterTestingModule,
         HttpClientTestingModule,
         MatIconModule,
-        MatToolbarModule
+        MatToolbarModule,
+        MatSnackBarModule
       ],
       declarations: [
         CategoriesComponent

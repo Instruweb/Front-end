@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ProductsService} from "./products.service";
 import {ActivatedRoute} from "@angular/router";
 import {Product} from "./product";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-products',
@@ -18,7 +19,8 @@ export class ProductsComponent implements OnInit {
 
   constructor(
     private productsService: ProductsService,
-    private _ActivatedRoute: ActivatedRoute) {
+    private _ActivatedRoute: ActivatedRoute,
+    private _snackBar: MatSnackBar) {
   }
 
   ngOnInit(): void {
@@ -45,7 +47,13 @@ export class ProductsComponent implements OnInit {
 
   getProductsByMainCategoryId(id: number): void {
     this.productsService.getProductsByMainCategoryId(id).subscribe(
-      products => (this.productsByCategory = products)
+      products => (this.productsByCategory = products),
+      error => {
+        this._snackBar.open("The backend service is not available: " + error.statusText, 'OK', {
+          duration: 5000,
+          panelClass: ['errorSnackbar']
+        })
+      }
     );
   }
 
