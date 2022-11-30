@@ -44,11 +44,11 @@ function initializeKeycloak(keycloak: KeycloakService) {
         clientId: environment.keycloak.clientId
       },
       initOptions: {
+        messageReceiveTimeout: 1000,
         onLoad: 'check-sso',
         silentCheckSsoRedirectUri: window.location.origin + '/assets/silent-check-sso.html',
         pkceMethod: 'S256',
-        redirectUri: environment.keycloak.redirectUri,
-        checkLoginIframe: false
+        redirectUri: environment.keycloak.redirectUri
       },
       shouldAddToken: (request) => {
         const { method } = request;
