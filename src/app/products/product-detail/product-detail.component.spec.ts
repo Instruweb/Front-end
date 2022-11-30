@@ -3,6 +3,7 @@ import {RouterTestingModule} from '@angular/router/testing';
 import {HttpClientTestingModule} from "@angular/common/http/testing";
 import {ProductDetailComponent} from "./product-detail.component";
 import {MatTabsModule} from "@angular/material/tabs";
+import {MatSnackBarModule} from "@angular/material/snack-bar";
 
 describe('Product Detail Component', () => {
   beforeEach(async () => {
@@ -10,7 +11,8 @@ describe('Product Detail Component', () => {
       imports: [
         RouterTestingModule,
         HttpClientTestingModule,
-        MatTabsModule
+        MatTabsModule,
+        MatSnackBarModule
       ],
       declarations: [
         ProductDetailComponent

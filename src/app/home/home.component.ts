@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {CategoriesService} from "../categories/categories.service";
 import {Category} from "../categories/category";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-home',
@@ -11,8 +12,10 @@ import {Category} from "../categories/category";
 export class HomeComponent implements OnInit {
   categories: Category[] = [];
 
-  constructor(private categoriesService: CategoriesService) {
-  }
+  constructor(
+    private categoriesService: CategoriesService,
+    private _snackBar: MatSnackBar
+  ) {}
 
   async ngOnInit() {
     await this.getAllCategories();
@@ -20,7 +23,13 @@ export class HomeComponent implements OnInit {
 
   async getAllCategories() {
     (await this.categoriesService.getAllCategories()).subscribe(
-      categories => (this.categories = categories)
+      categories => (this.categories = categories),
+      error => {
+        this._snackBar.open("The backend service is not available: " + error.statusText, 'OK', {
+          duration: 5000,
+          panelClass: ['errorSnackbar']
+        });
+      }
     );
   }
 }

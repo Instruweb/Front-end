@@ -5,7 +5,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {UsersComponent} from './users/users.component';
-import {HttpClient, HttpClientModule} from "@angular/common/http";
+import {HttpClientModule} from "@angular/common/http";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {ProductsComponent} from './products/products.component';
 import {CategoriesComponent} from './categories/categories.component';
@@ -22,6 +22,8 @@ import { ProductDetailComponent } from './products/product-detail/product-detail
 import {MatTabsModule} from "@angular/material/tabs";
 import {KeycloakAngularModule, KeycloakService} from "keycloak-angular";
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
+import {MatSnackBarModule} from "@angular/material/snack-bar";
+import {environment} from "../environments/environment";
 
 const appRoutes: Routes = [
   {path: 'home', component: HomeComponent},
@@ -37,19 +39,19 @@ function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
     keycloak.init({
       config: {
-        url: 'http://localhost:8484',
-        realm: 'instruweb',
-        clientId: 'front-end-service'
+        url: environment.keycloak.url,
+        realm: environment.keycloak.realm,
+        clientId: environment.keycloak.clientId
       },
       initOptions: {
         onLoad: 'check-sso',
         silentCheckSsoRedirectUri: window.location.origin + '/assets/silent-check-sso.html',
         pkceMethod: 'S256',
-        redirectUri: 'http://localhost:4200',
+        redirectUri: environment.keycloak.redirectUri,
         checkLoginIframe: false
       },
       shouldAddToken: (request) => {
-        const { method, url } = request;
+        const { method } = request;
 
         const isGetRequest = 'GET' === method.toUpperCase();
         const acceptablePaths = ['/assets', '/api/*'];
@@ -57,7 +59,7 @@ function initializeKeycloak(keycloak: KeycloakService) {
         return !(isGetRequest && acceptablePaths);
       }
     }).then(success => console.log(`keycloak service is available.`)
-    ).catch(ex => console.log(`keycloak init exception: ${ex.error_description}`));
+    ).catch(ex => alert(`The keycloak service is temporarily unavailable. Please come back later. \nError: ${ex.error_description}`));
 }
 
 @NgModule({
@@ -88,7 +90,8 @@ function initializeKeycloak(keycloak: KeycloakService) {
     MatInputModule,
     MatTabsModule,
     MatAutocompleteModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatSnackBarModule
   ],
   exports: [
     RouterModule

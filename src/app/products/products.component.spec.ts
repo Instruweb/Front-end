@@ -5,6 +5,7 @@ import {ProductsComponent} from "./products.component";
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatIconModule} from "@angular/material/icon";
+import {MatSnackBarModule} from "@angular/material/snack-bar";
 
 describe('Products Component', () => {
   beforeEach(async () => {
@@ -14,7 +15,8 @@ describe('Products Component', () => {
         HttpClientTestingModule,
         MatAutocompleteModule,
         MatFormFieldModule,
-        MatIconModule
+        MatIconModule,
+        MatSnackBarModule
       ],
       declarations: [
         ProductsComponent

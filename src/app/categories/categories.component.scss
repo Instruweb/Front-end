@@ -46,6 +46,11 @@ nav {
 .mat-toolbar-multiple-rows {
   min-height: 45px;
 }
+
+.noCategoriesRow {
+  height: unset;
+  font-size: 15px;
+}
 //
 //.mat-toolbar-row,  {
 //  height: 45px;

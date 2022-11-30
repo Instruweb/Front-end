@@ -3,13 +3,15 @@ import {RouterTestingModule} from '@angular/router/testing';
 import {HomeComponent} from './home.component'
 import {HttpClientTestingModule} from "@angular/common/http/testing";
 import {CategoriesService} from "../categories/categories.service";
+import {MatSnackBarModule} from "@angular/material/snack-bar";
 
 describe('HomeComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
         RouterTestingModule,
-        HttpClientTestingModule
+        HttpClientTestingModule,
+        MatSnackBarModule
       ],
       declarations: [
         HomeComponent

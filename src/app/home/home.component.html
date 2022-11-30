@@ -7,7 +7,7 @@
   <div class="row">
     <h2 class="col">CATEGORIEËN</h2>
   </div>
-  <div class="row">
+  <div class="row" *ngIf="categories.length > 0; else noCategories">
     <div class="card col-3" *ngFor="let category of categories">
       <a [routerLink]="['/category', category.id]">
         <img class="card-img-top" src="/assets/images/{{category.image}}" alt="Card image cap">
@@ -17,4 +17,8 @@
       </a>
     </div>
   </div>
+
+  <ng-template #noCategories>
+    No categories are available at this given moment.<br>Please come back later.
+  </ng-template>
 </div>
