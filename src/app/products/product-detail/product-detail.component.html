@@ -9,6 +9,7 @@
       <mat-tab label="Specifications">
         <p class="card-text">{{product.description}}</p>
         <p class="card-text">Supply: {{product.supply}}</p>
+        <p class="card-text">ID: {{product.main_categoryId}}</p>
       </mat-tab>
     </mat-tab-group>
 
@@ -18,5 +19,20 @@
         <p>Product not found.</p>
       </div>
     </ng-template>
+  </div>
+  <div class="row mt-5">
+    <h4>Gerelateerde producten</h4>
+  </div>
+  <div class="row" *ngIf="productsByMainCategory && product">
+    <div *ngFor="let productByCategory of productsByMainCategory">
+      <div class="card" *ngIf="productByCategory.id != product.id">
+        <img class="card-img-top" src="/assets/images/{{productByCategory.image}}" alt="Card image cap">
+        <div class="card-body">
+          <h3 class="card-title">{{productByCategory.name}}</h3>
+          <h4 class="card-subtitle mb-2 text-muted">&euro; {{productByCategory.price}}</h4>
+          <a [routerLink]="['/products/detail', productByCategory.id]" class="btn btn-primary">More info</a>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

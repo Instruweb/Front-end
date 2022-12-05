@@ -14,6 +14,7 @@ export class ProductDetailComponent implements OnInit {
   errorMessage: string = "";
   id: number = 0;
   product: Product | undefined;
+  productsByMainCategory: Product[] = [];
 
   constructor(
     private productDetailService: ProductDetailService,
@@ -32,6 +33,7 @@ export class ProductDetailComponent implements OnInit {
     (await this.productDetailService.getProductById(id))
       .subscribe(res => {
           this.product = <Product>res;
+          this.getMainCategoryByProductId(this.product.main_categoryId);
           this.errorMessage = "";
         },
         error => {
@@ -43,5 +45,13 @@ export class ProductDetailComponent implements OnInit {
           })
         }
       )
+  }
+
+  async getMainCategoryByProductId(id: number) {
+    if (id) {
+      (await this.productDetailService.getMainCategoryByProductId(id))?.subscribe(res => {
+        this.productsByMainCategory = res;
+      });
+    }
   }
 }
