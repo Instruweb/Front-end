@@ -50,7 +50,7 @@ export class ProductDetailComponent implements OnInit {
   async getMainCategoryByProductId(id: number) {
     if (id) {
       (await this.productDetailService.getMainCategoryByProductId(id))?.subscribe(res => {
-        this.productsByMainCategory = res;
+        this.productsByMainCategory = <Product[]>res;
       });
     }
   }

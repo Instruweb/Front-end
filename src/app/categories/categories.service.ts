@@ -15,7 +15,7 @@ export class CategoriesService {
   }
 
   getAllCategories(): Observable<Category[]> {
-    const url = '/api/categories/all';
+    const url = '/api/categories/';
     return this.http.get<Category[]>(url);
   }
 }

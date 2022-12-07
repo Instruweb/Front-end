@@ -16,7 +16,7 @@ export class ProductsService {
   }
 
   async getAllProducts(): Promise<Observable<Product[]>> {
-    const url = '/api/products/all';
+    const url = '/api/products/';
     return this.http.get<Product[]>(url);
   }
 
