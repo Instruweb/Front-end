@@ -7,7 +7,7 @@ import {CategoriesService} from "./categories/categories.service";
 import {KeycloakService} from "keycloak-angular";
 import {MatIconModule} from "@angular/material/icon";
 import {MatToolbarModule} from "@angular/material/toolbar";
-import {MatSnackBarModule} from "@angular/material/snack-bar";
+import {MatLegacySnackBarModule as MatSnackBarModule} from "@angular/material/legacy-snack-bar";
 
 describe('AppComponent', () => {
   beforeEach(async () => {
