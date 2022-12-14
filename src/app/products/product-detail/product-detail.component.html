@@ -1,5 +1,5 @@
 <div class="container mt-5">
-  <div class="row" *ngIf="product; else noProduct">
+  <div class="row product" *ngIf="product; else noProduct">
     <h1 class="card-title w-100">{{product.name}}</h1>
     <span class="spacer"></span>
     <div class="col">
@@ -31,9 +31,9 @@
   <div class="row mt-5">
     <h4>Gerelateerde producten</h4>
   </div>
-  <div class="row" *ngIf="productsByMainCategory && product">
+  <div class="row relatedProducts" *ngIf="productsByMainCategory && product">
     <div *ngFor="let productByCategory of productsByMainCategory">
-      <div *ngIf="productByCategory.id != product.id">
+      <div *ngIf="productByCategory.id != product.id" >
         <div class="card">
           <img class="card-img-top" src="/assets/images/{{productByCategory.image}}" alt="Card image cap">
           <div class="card-body">
