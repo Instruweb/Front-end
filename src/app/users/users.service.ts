@@ -1,13 +1,11 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {User} from "./user";
 import {API_HEADERS} from "../../url.constants";
 import {KeycloakService} from "keycloak-angular";
 
 @Injectable()
 export class UsersService {
-
-  constructor(private http: HttpClient, private keycloakService: KeycloakService) {
+    constructor(private http: HttpClient, private keycloakService: KeycloakService) {
     this.setHeaders().then(r => console.log(r));
   }
 

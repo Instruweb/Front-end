@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {UsersService} from "./users.service";
 import {KeycloakService} from "keycloak-angular";
 import {User} from "./user";
+import {MatLegacySnackBar as MatSnackBar} from "@angular/material/legacy-snack-bar";
 
 @Component({
   selector: 'app-users',
@@ -11,10 +12,12 @@ import {User} from "./user";
 })
 export class UsersComponent implements OnInit {
   loggedIn: boolean = false;
-  email: string = "";
   user: User | undefined;
 
-  constructor(private userService: UsersService, private keycloakservice: KeycloakService) {
+  constructor(
+    private userService: UsersService,
+    private keycloakservice: KeycloakService,
+    private _snackBar: MatSnackBar) {
   }
 
   async ngOnInit() {
@@ -32,6 +35,11 @@ export class UsersComponent implements OnInit {
         this.user.firstname = profile.firstName;
         this.user.lastname = profile.lastName
         this.user.username = profile.username;
+      }, error => {
+        this._snackBar.open("The backend service is not available: " + error.statusText, 'OK', {
+          duration: 5000,
+          panelClass: ['errorSnackbar']
+        });
       });
     });
   }
@@ -49,14 +57,4 @@ export class UsersComponent implements OnInit {
   async doLogout() {
     this.keycloakservice.logout().then(r => console.log(r));
   }
-
-  search(searchTerm: string) {
-    if (searchTerm) {
-      this.userService.getUser(searchTerm)?.subscribe(res => {
-        this.user = <User>res;
-        console.log(this.user.emailaddress);
-      });
-    }
-  }
-
 }

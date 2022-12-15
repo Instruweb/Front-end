@@ -19,7 +19,7 @@
       <button mat-icon-button type="submit"><mat-icon>search</mat-icon></button>
     </form>
     <button class="btn btn-primary" (click)="clear()">Clear</button>
-    <div *ngIf="foundProduct">
+    <div *ngIf="foundProduct" class="foundProduct">
       <div class="card col-4">
         <img class="card-img-top" src="/assets/images/{{foundProduct.image}}" alt="Card image cap">
         <div class="card-body">
@@ -33,7 +33,7 @@
   </div>
 
   <div *ngIf="!foundProduct">
-    <div *ngIf="productsByCategory.length > 0; else noProducts" class="row">
+    <div *ngIf="productsByCategory.length > 0; else noProducts" class="row product-list">
       <div class="card col-4" *ngFor="let product of productsByCategory">
         <img class="card-img-top" src="/assets/images/{{product.image}}" alt="Card image cap">
         <div class="card-body">

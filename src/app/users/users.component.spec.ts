@@ -6,7 +6,7 @@ import {UsersComponent} from "./users.component";
 import {MatIconModule} from "@angular/material/icon";
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {UsersService} from "./users.service";
-import {MatSnackBarModule} from "@angular/material/snack-bar";
+import {MatLegacySnackBarModule as MatSnackBarModule} from "@angular/material/legacy-snack-bar";
 
 describe('CategoriesComponent', () => {
   beforeEach(async () => {
@@ -42,5 +42,24 @@ describe('CategoriesComponent', () => {
     const app = fixture.componentInstance;
 
     expect(app.loggedIn).toEqual(false);
+  });
+
+  it('No user should be on the page', () => {
+    // Arrange
+    let user = undefined;
+
+    // Act
+    const fixture = TestBed.createComponent(UsersComponent);
+
+    const app = fixture.componentInstance;
+
+    app.user = user;
+
+    fixture.detectChanges();
+
+    const noUser = fixture.nativeElement as HTMLElement;
+
+    // Assert
+    expect(noUser.querySelector('h2')?.textContent).toEqual("You are logged out...");
   });
 });
