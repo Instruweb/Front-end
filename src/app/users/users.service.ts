@@ -23,7 +23,7 @@ export class UsersService {
       const url = '/api/users/' + emailaddress;
       return this.http.get(url, API_HEADERS);
     }
-    return "Got user";
+    return;
   }
 
   sendEmail(emailaddress: string | undefined, username: string | undefined) {
@@ -32,7 +32,7 @@ export class UsersService {
       const url = '/api/users/register/' + username + "/" + emailaddress;
       return this.http.post<any>(url, {headers: API_HEADERS.headers}).subscribe(data => console.log("Added"))
     }
-    return "Updated";
+    return;
   }
 
   updateUser(username: string, address: string, postalcode: string, phonenumber: string) {
@@ -40,6 +40,6 @@ export class UsersService {
       const url = '/api/users/update/' + username + "/" + postalcode + "/" + address + "/" + phonenumber;
       return this.http.put<any>(url, {headers: API_HEADERS.headers}).subscribe(data => console.log("Updated"))
     }
-    return "Updated";
+    return;
   }
 }
