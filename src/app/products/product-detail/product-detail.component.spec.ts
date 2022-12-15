@@ -5,7 +5,6 @@ import {ProductDetailComponent} from "./product-detail.component";
 import {MatLegacyTabsModule as MatTabsModule} from "@angular/material/legacy-tabs";
 import {MatLegacySnackBarModule as MatSnackBarModule} from "@angular/material/legacy-snack-bar";
 import {ProductDetailService} from "./product-detail.service";
-import {ProductsComponent} from "../products.component";
 import {By} from "@angular/platform-browser";
 
 describe('Product Detail Component', () => {

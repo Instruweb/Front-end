@@ -1,16 +1,13 @@
 import {getTestBed, TestBed} from '@angular/core/testing';
 import {RouterTestingModule} from '@angular/router/testing';
-import {HttpClientTestingModule, HttpTestingController} from "@angular/common/http/testing";
+import {HttpClientTestingModule} from "@angular/common/http/testing";
 import {ProductsComponent} from "./products.component";
 import {MatLegacyAutocompleteModule as MatAutocompleteModule} from "@angular/material/legacy-autocomplete";
 import {MatLegacyFormFieldModule as MatFormFieldModule} from "@angular/material/legacy-form-field";
 import {MatIconModule} from "@angular/material/icon";
 import {MatLegacySnackBarModule as MatSnackBarModule} from "@angular/material/legacy-snack-bar";
 import {ProductsService} from "./products.service";
-import {Observable} from "rxjs";
-import {Product} from "./product";
 import {By} from "@angular/platform-browser";
-import {DebugElement} from "@angular/core";
 import {MatLegacyInputModule as MatInputModule} from "@angular/material/legacy-input";
 import {BrowserAnimationsModule, NoopAnimationsModule} from "@angular/platform-browser/animations";
 

@@ -22,7 +22,7 @@ export class HomeComponent implements OnInit {
   }
 
   async getAllCategories() {
-    (await this.categoriesService.getAllCategories()).subscribe(
+    this.categoriesService.getAllCategories().subscribe(
       categories => (this.categories = categories),
       error => {
         this._snackBar.open("The backend service is not available: " + error.statusText, 'OK', {
