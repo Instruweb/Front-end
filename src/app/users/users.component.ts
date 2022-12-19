@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {UsersService} from "./users.service";
 import {KeycloakService} from "keycloak-angular";
 import {User} from "./user";
-import {MatLegacySnackBar as MatSnackBar} from "@angular/material/legacy-snack-bar";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-users',

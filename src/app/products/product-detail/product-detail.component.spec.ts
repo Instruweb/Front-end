@@ -1,16 +1,13 @@
-import {getTestBed, TestBed} from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 import {RouterTestingModule} from '@angular/router/testing';
 import {HttpClientTestingModule} from "@angular/common/http/testing";
 import {ProductDetailComponent} from "./product-detail.component";
-import {MatLegacyTabsModule as MatTabsModule} from "@angular/material/legacy-tabs";
-import {MatLegacySnackBarModule as MatSnackBarModule} from "@angular/material/legacy-snack-bar";
+import {MatTabsModule} from "@angular/material/tabs";
+import {MatSnackBarModule} from "@angular/material/snack-bar";
 import {ProductDetailService} from "./product-detail.service";
 import {By} from "@angular/platform-browser";
 
 describe('Product Detail Component', () => {
-  let injector: TestBed;
-  let productDetailService: ProductDetailService;
-
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
@@ -24,8 +21,6 @@ describe('Product Detail Component', () => {
       ],
       providers: [ProductDetailService]
     }).compileComponents();
-    injector = getTestBed();
-    productDetailService = injector.get(ProductDetailService);
   });
 
   it('should create the component', () => {
@@ -88,5 +83,39 @@ describe('Product Detail Component', () => {
 
     // Assert
     expect(theProduct.querySelector('h1')?.textContent).toEqual(product.name);
+  });
+
+  it('Expect the getProductById function to return undefined.', async () => {
+    // Arrange
+    let id = 1;
+
+    // Act
+    const fixture = TestBed.createComponent(ProductDetailComponent);
+
+    const app = fixture.componentInstance;
+
+    app.id = id
+
+    fixture.detectChanges();
+
+    // Assert
+    expect(await app.getProductById(id)).toBeUndefined();
+  });
+
+  it('Expect the getMainCategoryByProductId function to return undefined.', async () => {
+    // Arrange
+    let id = 1;
+
+    // Act
+    const fixture = TestBed.createComponent(ProductDetailComponent);
+
+    const app = fixture.componentInstance;
+
+    app.id = id
+
+    fixture.detectChanges();
+
+    // Assert
+    expect(await app.getMainCategoryByProductId(id)).toBeUndefined();
   });
 });

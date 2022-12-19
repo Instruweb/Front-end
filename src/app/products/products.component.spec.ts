@@ -1,20 +1,17 @@
-import {getTestBed, TestBed} from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 import {RouterTestingModule} from '@angular/router/testing';
 import {HttpClientTestingModule} from "@angular/common/http/testing";
 import {ProductsComponent} from "./products.component";
-import {MatLegacyAutocompleteModule as MatAutocompleteModule} from "@angular/material/legacy-autocomplete";
-import {MatLegacyFormFieldModule as MatFormFieldModule} from "@angular/material/legacy-form-field";
+import {MatAutocompleteModule} from "@angular/material/autocomplete";
+import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatIconModule} from "@angular/material/icon";
-import {MatLegacySnackBarModule as MatSnackBarModule} from "@angular/material/legacy-snack-bar";
+import {MatSnackBarModule} from "@angular/material/snack-bar";
 import {ProductsService} from "./products.service";
 import {By} from "@angular/platform-browser";
-import {MatLegacyInputModule as MatInputModule} from "@angular/material/legacy-input";
+import {MatInputModule} from "@angular/material/input";
 import {BrowserAnimationsModule, NoopAnimationsModule} from "@angular/platform-browser/animations";
 
 describe('Products Component', () => {
-  let injector: TestBed;
-  let productService: ProductsService;
-
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
@@ -33,8 +30,6 @@ describe('Products Component', () => {
       ],
       providers: [ProductsService]
     }).compileComponents();
-    injector = getTestBed();
-    productService = injector.get(ProductsService);
   });
 
   it('should create the component', () => {

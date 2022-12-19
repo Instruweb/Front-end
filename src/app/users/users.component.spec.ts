@@ -6,7 +6,7 @@ import {UsersComponent} from "./users.component";
 import {MatIconModule} from "@angular/material/icon";
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {UsersService} from "./users.service";
-import {MatLegacySnackBarModule as MatSnackBarModule} from "@angular/material/legacy-snack-bar";
+import {MatSnackBarModule} from "@angular/material/snack-bar";
 
 describe('CategoriesComponent', () => {
   beforeEach(async () => {

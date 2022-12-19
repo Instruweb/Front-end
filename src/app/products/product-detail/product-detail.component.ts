@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ProductDetailService} from "./product-detail.service";
 import {ActivatedRoute} from "@angular/router";
 import {Product} from "../product";
-import {MatLegacySnackBar as MatSnackBar} from "@angular/material/legacy-snack-bar";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-product-detail',
@@ -50,7 +50,7 @@ export class ProductDetailComponent implements OnInit {
   async getMainCategoryByProductId(id: number) {
     if (id) {
       (await this.productDetailService.getMainCategoryByProductId(id))?.subscribe(res => {
-        this.productsByMainCategory = <Product[]>res;
+        this.productsByMainCategory = res;
       });
     }
   }
