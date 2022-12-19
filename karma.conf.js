@@ -9,7 +9,9 @@ module.exports = function (config) {
       require('karma-jasmine'),
       require('karma-chrome-launcher'),
       require('karma-jasmine-html-reporter'),
+      require('karma-coverage-istanbul-reporter'),
       require('karma-coverage'),
+      require('karma-sonarqube-reporter'),
       require('@angular-devkit/build-angular/plugins/karma')
     ],
     client: {
@@ -29,10 +31,26 @@ module.exports = function (config) {
       subdir: '.',
       reporters: [
         { type: 'html' },
-        { type: 'text-summary' }
+        { type: 'text-summary' },
+        { type: 'lcov', subdir: 'lcov-report' }
       ]
     },
-    reporters: ['progress', 'kjhtml'],
+    coverageIstanbulReporter: {
+      dir: require('path').join(__dirname, './coverage/lcov-report'),
+      reports: ['lcovonly'],
+      fixWebpackSourcePaths: true
+    },
+    sonarqubeReporter: {
+      basePath: 'src/app', // test files folder
+      filePattern: '**/*spec.ts', // test files glob pattern
+      encoding: 'utf-8', // test files encoding
+      outputFolder: 'reports', // report destination
+      legacyMode: false, // report for Sonarqube < 6.2 (disabled)
+      reportName: function (metadata) {
+        return 'sonarqube_report.xml';
+      },
+    },
+    reporters: ['progress', 'kjhtml', 'sonarqube'],
     port: 9876,
     colors: true,
     logLevel: config.LOG_INFO,

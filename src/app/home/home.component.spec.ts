@@ -3,7 +3,7 @@ import {RouterTestingModule} from '@angular/router/testing';
 import {HomeComponent} from './home.component'
 import {HttpClientTestingModule} from "@angular/common/http/testing";
 import {CategoriesService} from "../categories/categories.service";
-import {MatLegacySnackBarModule as MatSnackBarModule} from "@angular/material/legacy-snack-bar";
+import {MatSnackBarModule} from "@angular/material/snack-bar";
 
 describe('HomeComponent', () => {
   beforeEach(async () => {

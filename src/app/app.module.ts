@@ -11,18 +11,18 @@ import {ProductsComponent} from './products/products.component';
 import {CategoriesComponent} from './categories/categories.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatToolbarModule} from "@angular/material/toolbar";
-import {MatLegacyButtonModule as MatButtonModule} from "@angular/material/legacy-button";
+import {MatButtonModule} from "@angular/material/button";
 import {MatIconModule} from "@angular/material/icon";
 import {HomeComponent} from './home/home.component';
 import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
 import {MatGridListModule} from "@angular/material/grid-list";
-import {MatLegacyFormFieldModule as MatFormFieldModule} from "@angular/material/legacy-form-field";
-import {MatLegacyInputModule as MatInputModule} from "@angular/material/legacy-input";
-import { ProductDetailComponent } from './products/product-detail/product-detail.component';
-import {MatLegacyTabsModule as MatTabsModule} from "@angular/material/legacy-tabs";
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatInputModule} from "@angular/material/input";
+import {ProductDetailComponent} from './products/product-detail/product-detail.component';
+import {MatTabsModule} from "@angular/material/tabs";
 import {KeycloakAngularModule, KeycloakService} from "keycloak-angular";
-import {MatLegacyAutocompleteModule as MatAutocompleteModule} from "@angular/material/legacy-autocomplete";
-import {MatLegacySnackBarModule as MatSnackBarModule} from "@angular/material/legacy-snack-bar";
+import {MatAutocompleteModule} from "@angular/material/autocomplete";
+import {MatSnackBarModule} from "@angular/material/snack-bar";
 import {environment} from "../environments/environment";
 
 const appRoutes: Routes = [

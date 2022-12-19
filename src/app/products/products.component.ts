@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ProductsService} from "./products.service";
 import {ActivatedRoute} from "@angular/router";
 import {Product} from "./product";
-import {MatLegacySnackBar as MatSnackBar} from "@angular/material/legacy-snack-bar";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-products',

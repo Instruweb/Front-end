@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {CategoriesService} from "../categories/categories.service";
 import {Category} from "../categories/category";
-import {MatLegacySnackBar as MatSnackBar} from "@angular/material/legacy-snack-bar";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-home',
