@@ -1,7 +1,7 @@
 {
   "/api/*": {
     "target": "https://instruweb-cd-b.app",
-    "secure": true,
+    "secure": false,
     "logLevel": "info",
     "changeOrigin": true
   },
