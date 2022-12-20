@@ -1,5 +1,5 @@
 {
-  "/api/*": {
+  "/api/": {
     "target": "http://quarkus:8080",
     "secure": true,
     "logLevel": "info",
