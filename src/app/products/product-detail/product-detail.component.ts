@@ -17,7 +17,7 @@ export class ProductDetailComponent implements OnInit {
   productsByMainCategory: Product[] = [];
 
   constructor(
-    private productDetailService: ProductDetailService,
+    public productDetailService: ProductDetailService,
     private _ActivatedRoute: ActivatedRoute,
     private _snackBar: MatSnackBar) {
   }
