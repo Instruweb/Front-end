@@ -22,11 +22,10 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - name: Run docker compose as background services
         run: docker-compose -f docker-compose.e2e.yml up -d
-      - name: Install dependencies
-        run: npm ci --legacy-peer-deps
       - name: Run end-to-end tests
         uses: cypress-io/github-action@v4.2.1
         with:
+          run: npm ci --legacy-peer-deps
           build: npm run build
           start: npm run start
 
