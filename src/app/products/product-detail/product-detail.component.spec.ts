@@ -1,4 +1,4 @@
-import {TestBed} from '@angular/core/testing';
+import {fakeAsync, TestBed} from '@angular/core/testing';
 import {RouterTestingModule} from '@angular/router/testing';
 import {HttpClientTestingModule} from "@angular/common/http/testing";
 import {ProductDetailComponent} from "./product-detail.component";
@@ -19,7 +19,14 @@ describe('Product Detail Component', () => {
       declarations: [
         ProductDetailComponent
       ],
-      providers: [ProductDetailService]
+      providers: [
+        {
+          provide: ProductDetailService,
+          useValue: {
+            getMainCategoryByProductId: () => ({name: 'Gitaar'})
+          }
+        }
+      ]
     }).compileComponents();
   });
 
@@ -47,12 +54,10 @@ describe('Product Detail Component', () => {
       {id: 3, name: "iets 3", price: 350.99, image: "null", description: "null", supply: "full", main_categoryId: 1, sub_categoryId: 1}
     ]
     let product = {id: 4, name: "Gevonden", price: 350.99, image: "null", description: "null", supply: "full", main_categoryId: 3, sub_categoryId: 2}
-
-    // Act
     const fixture = TestBed.createComponent(ProductDetailComponent);
-
     const app = fixture.componentInstance;
 
+    // Act
     app.productsByMainCategory = products;
     app.product = product;
     app.id = 4;
@@ -68,12 +73,10 @@ describe('Product Detail Component', () => {
   it('There should be one product on the page', () => {
     // Arrange
     let product = {id: 1, name: "Gevonden", price: 350.99, image: "null", description: "null", supply: "full", main_categoryId: 3, sub_categoryId: 2}
-
-    // Act
     const fixture = TestBed.createComponent(ProductDetailComponent);
-
     const app = fixture.componentInstance;
 
+    // Act
     app.product = product;
     app.id = 1;
 
@@ -88,34 +91,32 @@ describe('Product Detail Component', () => {
   it('Expect the getProductById function to return undefined.', async () => {
     // Arrange
     let id = 1;
-
-    // Act
     const fixture = TestBed.createComponent(ProductDetailComponent);
-
     const app = fixture.componentInstance;
 
+    // Act
     app.id = id
+    let product = await app.getProductById(id);
 
     fixture.detectChanges();
 
     // Assert
-    expect(await app.getProductById(id)).toBeUndefined();
+    expect(product).toBeUndefined();
   });
 
   it('Expect the getMainCategoryByProductId function to return undefined.', async () => {
     // Arrange
-    let id = 1;
-
-    // Act
     const fixture = TestBed.createComponent(ProductDetailComponent);
-
     const app = fixture.componentInstance;
 
-    app.id = id
-
+    app.id = 1;
     fixture.detectChanges();
+    const test = spyOn(app, 'getProductById');
+
+    // Act
+    await app.ngOnInit();
 
     // Assert
-    expect(await app.getMainCategoryByProductId(id)).toBeUndefined();
+    expect(test).toHaveBeenCalled();
   });
 });
