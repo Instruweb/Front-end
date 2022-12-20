@@ -1,9 +1,12 @@
 {
-  "/api/": {
+  "/api/*": {
     "target": "http://quarkus:8080",
     "secure": true,
     "logLevel": "info",
-    "changeOrigin": true
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/api": ""
+    }
   },
   "/auth": {
     "target": "http://localhost:8484",
