@@ -23,7 +23,7 @@ jobs:
       - name: Run docker compose as background services
         run: docker-compose -f docker-compose.e2e.yml up -d
       - name: Check docker ip
-        run: docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}'
+        run: docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' quarkus
       - name: Cypress install dependencies
         run: npm ci --legacy-peer-deps
       - name: Cypress run
