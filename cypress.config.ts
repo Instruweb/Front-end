@@ -10,6 +10,7 @@ export default defineConfig({
   video: false,
   screenshotOnRunFailure: false,
   chromeWebSecurity: false,
+
   env: {
     CYPRESS_USERNAME: 'nickwelles',
     CYPRESS_PASSWORD: 'Nickwelles'
