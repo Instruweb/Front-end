@@ -18,7 +18,7 @@ services:
 
   quarkus:
     image: forevigt/quarkus:latest
-    container_name: quarkus
+    container_name: localhost
     ports:
       - "8080:8080"
     depends_on:
