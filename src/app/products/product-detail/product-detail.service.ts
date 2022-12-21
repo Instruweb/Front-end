@@ -10,7 +10,7 @@ export class ProductDetailService {
   }
 
   async getProductById(id: number) {
-    const url = 'http://localhost:8080/api/products/id/' + id;
+    const url = 'api/products/id/' + id;
     return this.http.get(url);
   }
 
