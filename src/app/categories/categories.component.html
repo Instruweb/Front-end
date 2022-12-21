@@ -17,7 +17,7 @@
         </div>
       </div>
       <div class="col-4 user-info" *ngIf="!loggedIn; else user">
-        <a (click)="doLogin()">
+        <a (click)="doLogin()" class="login-btn">
           Inloggen
         </a>
         <a>
