@@ -8,34 +8,34 @@ name: CD, Deploy to Firebase Hosting on merge
       - main
 
 jobs:
-  e2e:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [ 18.x ]
-
-    steps:
-      - uses: actions/checkout@v3
-      - name: Use Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: ${{ matrix.node-version }}
-      - name: Run docker compose as background services
-        run: docker-compose -f docker-compose.e2e.yml up -d
-      - name: Check docker ip
-        run: docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' quarkus
-      - name: Cypress install dependencies
-        run: npm ci --legacy-peer-deps
-      - name: Cypress run
-        uses: cypress-io/github-action@v5
-        with:
-          install: false
-          build: npm run build
-          start: npm start
+#  e2e:
+#    runs-on: ubuntu-latest
+#    strategy:
+#      matrix:
+#        node-version: [ 18.x ]
+#
+#    steps:
+#      - uses: actions/checkout@v3
+#      - name: Use Node.js
+#        uses: actions/setup-node@v3
+#        with:
+#          node-version: ${{ matrix.node-version }}
+#      - name: Run docker compose as background services
+#        run: docker-compose -f docker-compose.e2e.yml up -d
+#      - name: Check docker ip
+#        run: docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' quarkus
+#      - name: Cypress install dependencies
+#        run: npm ci --legacy-peer-deps
+#      - name: Cypress run
+#        uses: cypress-io/github-action@v5
+#        with:
+#          install: false
+#          build: npm run build
+#          start: npm start
 
 
   build_and_deploy:
-    needs: e2e
+    # needs: e2e
     runs-on: ubuntu-latest
 
     steps:
@@ -61,3 +61,32 @@ jobs:
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_INSTRUWEB_CD }}'
           channelId: live
           projectId: instruweb-cd
+
+  performance-test:
+    needs: build_and_deploy
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [ 18.x ]
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Run docker compose as background services
+        run: docker-compose -f docker-compose.e2e.yml up -d
+      - name: Install dependencies
+        run: npm ci --legacy-peer-deps
+      - name: Audit URLs using Lighthouse
+        uses: treosh/lighthouse-ci-action@v9
+        with:
+          build: npm run build
+          start: npm start
+          urls: |
+            https://instruweb-cd.web.app/
+          budgetPath: ./budget.json # test performance budgets
+          uploadArtifacts: true # save results as an action artifacts
+          temporaryPublicStorage: true # upload lighthouse report to the temporary storage
