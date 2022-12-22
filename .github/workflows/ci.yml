@@ -42,4 +42,4 @@ jobs:
         image:
           name: artilleryio/artillery:latest
           entrypoint: [ "" ]
-        script: /home/node/artillery/bin/artillery run artillerytest.yml
+        run: /home/node/artillery/bin/artillery run artillerytest.yml
