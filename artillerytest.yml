@@ -1,4 +1,4 @@
-# run this test by executing artillery run artillerytest.yml in a powershell terminal
+# run this test by executing npm run loadtester artillerytest.yml in a powershell terminal
 
 config:
   target: "http://localhost:4200/"
