@@ -39,7 +39,4 @@ jobs:
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_INSTRUWEB_CD }}'
           projectId: instruweb-cd
       - name: Stress/load test with Artillery
-        image:
-          name: artilleryio/artillery:latest
-          entrypoint: [ "" ]
         run: /home/node/artillery/bin/artillery run artillerytest.yml
