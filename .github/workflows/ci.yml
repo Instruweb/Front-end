@@ -38,3 +38,9 @@ jobs:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_INSTRUWEB_CD }}'
           projectId: instruweb-cd
+
+  artillery:
+    image:
+      name: artilleryio/artillery:latest
+      entrypoint: [ "" ]
+    script: /home/node/artillery/bin/artillery run artillerytest.yml
