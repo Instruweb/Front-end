@@ -38,7 +38,9 @@ jobs:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_INSTRUWEB_CD }}'
           projectId: instruweb-cd
-      - name: Start project for loadtesting
-        run: npm start
       - name: Stress/load test with Artillery
+        with:
+          install: false
+          build: npm run build
+          start: npm start
         run: npm run loadtester
