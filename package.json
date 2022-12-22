@@ -9,7 +9,8 @@
     "test": "ng test --no-watch --no-progress --browsers=ChromeHeadless",
     "sonar": "sonar-scanner",
     "test:e2e": "cypress run",
-    "lighthouse": "node lighthouse.js"
+    "lighthouse": "node lighthouse.js",
+    "loadtester": "artillery run"
   },
   "private": true,
   "dependencies": {

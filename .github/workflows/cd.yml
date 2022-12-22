@@ -83,8 +83,6 @@ jobs:
       - name: Audit URLs using Lighthouse
         uses: treosh/lighthouse-ci-action@v9
         with:
-          build: npm run build
-          start: npm start
           urls: |
             https://instruweb-cd.web.app/
           budgetPath: ./budget.json # test performance budgets
