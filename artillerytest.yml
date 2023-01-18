@@ -3,14 +3,12 @@
 config:
   target: "http://localhost:4200/"
   phases:
-  - duration: 600
-    arrivalRate: 50
-  - duration: 60
-    arrivalRate: 5
+  - duration: 600 # the time of one phase
+    arrivalRate: 50 # the number of users added each second
     name: Warm up
   - duration: 120
     arrivalRate: 5
-    rampTo: 50
+    rampTo: 50 # up to how many users per second the load will grow by
     name: Ramp up load
   - duration: 600
     arrivalRate: 50
