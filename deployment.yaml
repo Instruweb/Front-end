@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: instruweb-test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: instruweb-test
+  template:
+    metadata:
+      labels:
+        app: instruweb-test
+    spec:
+      containers:
+      - name: instruweb-test
+        image: forevigt/instruweb-test
+        ports:
+        - containerPort: 4200  # The port where your Angular app runs inside the container
+      imagePullSecrets:
+      - name: regcred

@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: instruweb-test
+spec:
+  selector:
+    app: instruweb-test
+  ports:
+    - name: http           # Adding a name for the port
+      port: 4200             # The port exposed to the outside world
+  type: LoadBalancer           # Or use 'LoadBalancer' if needed
